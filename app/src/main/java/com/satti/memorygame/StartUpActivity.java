@@ -1,5 +1,6 @@
 package com.satti.memorygame;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +13,13 @@ import android.widget.Toast;
 
 import com.satti.memorygame.network.RetrofitNetworkClient;
 import com.satti.memorygame.util.Networkutil;
+import com.satti.memorygame.util.TextUtils;
+
+import java.io.File;
 
 public class StartUpActivity extends AppCompatActivity {
+
+    GameApplication mGameApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +27,6 @@ public class StartUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start_up);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        if(!Networkutil.isNetworkAvailable(StartUpActivity.this)){
-            Toast.makeText(StartUpActivity.this,getString(R.string.no_network),Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     @Override
@@ -43,10 +44,41 @@ public class StartUpActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_clearCache) {
+            deleteCache();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void deleteCache() {
+        try {
+            File dir = this.getCacheDir();
+            if(deleteDir(dir)){
+                TextUtils.displayToast(this,getString(R.string.clear_cache_success));
+            }else{
+                TextUtils.displayToast(this,getString(R.string.clear_cache_failure));
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public  boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
     }
 }

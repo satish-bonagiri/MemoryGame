@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="7530856dc28ae2d5a5406967edb42c05608aeb53">
+        sha1="cd13db1b41c13a1e932448feb5957473ce2d38f0">
         <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0b5e4b74c084a7028f341b8e67aadece71c95aa3/classes.dex" />
     </item>
     <item
@@ -52,89 +52,8 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="54ed2c99a1425066ead433cf167c5d31d37b8d57">
+        sha1="fe0af7b4cb2a7e605a3188090c7ba77cc2732738">
         <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_58497be08142283f3a9082c8f0abdd1de3444aa9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_a52cf1dfa4c3eb0282a1170fe2d324f83780903b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_12be8f023d2b4270f82acf515435117fec0788c6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.7_bc800f5216395032bb077c696b7b844ab1732e77/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_d9b699727c0bdd09c371e6d5101fbb87bb38eade/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_a1d8cd1e851cb659c22e6ed81424affa36bdfdcd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_7ee897f0abdf34e344d3a391a69da3cd8de4c984/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_6b6f6563481d5c597c35cc5ea77dbe7421d4e103/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_5270dd4f2b81ac73ff721577c4df3a346bbab5a1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_d9fa6ca2d32a0e06562b20cf9eb03a538e955e80/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -156,12 +75,39 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_a52cf1dfa4c3eb0282a1170fe2d324f83780903b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_12be8f023d2b4270f82acf515435117fec0788c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/satish/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
         <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_918caa4b29a57fa9d634e665ca70d90307bb0b43/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.7_bc800f5216395032bb077c696b7b844ab1732e77/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -180,6 +126,24 @@
         revision="24.0.3"
         sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
         <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_d23601f3218f93ffabe85095b8748848e143748d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_d9b699727c0bdd09c371e6d5101fbb87bb38eade/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_a1d8cd1e851cb659c22e6ed81424affa36bdfdcd/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -210,12 +174,48 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_7ee897f0abdf34e344d3a391a69da3cd8de4c984/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/satish/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
         <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_63f6c7203eb0a2473d8ab2a1f8e0767242d67052/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_6b6f6563481d5c597c35cc5ea77dbe7421d4e103/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_5270dd4f2b81ac73ff721577c4df3a346bbab5a1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/satish/Memory_Game_Android_App/MemoryGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_d9fa6ca2d32a0e06562b20cf9eb03a538e955e80/classes.dex" />
     </item>
     <item
         is-multidex="true"
