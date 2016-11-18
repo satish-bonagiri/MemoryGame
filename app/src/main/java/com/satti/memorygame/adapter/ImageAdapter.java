@@ -74,7 +74,7 @@ public class ImageAdapter extends BaseAdapter {
 						.centerCrop()
 						.into(holder.imageView);
 			}else{
-				Picasso.with(mContext).load(R.mipmap.ic_launcher)
+				Picasso.with(mContext).load(R.drawable.placeholder)
 						.resize(120,120)
 						.centerCrop()
 						.into(holder.imageView);
