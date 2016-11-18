@@ -1,13 +1,16 @@
 package com.satti.memorygame.network;
 
 import com.google.gson.Gson;
+import com.satti.memorygame.adapter.AdapterModel;
 import com.satti.memorygame.network.model.FlickrModel;
+import com.satti.memorygame.network.model.Item;
 import com.satti.memorygame.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -55,20 +58,27 @@ public class RetrofitNetworkClient {
                         JSONObject jsonObject = new JSONObject(jsonStr);
                         FlickrModel flickrModel = gson.fromJson(jsonObject.toString(),FlickrModel.class);
                         if(flickrModel != null){
+                            ArrayList<AdapterModel> adapterModels = new ArrayList<AdapterModel>();
                              if(flickrModel.getItems() != null){
-
+                                 for(int i=0 ; i < 9 ;i++){
+                                     Item item = flickrModel.getItems().get(i);
+                                     AdapterModel adapterModel = new AdapterModel();
+                                     adapterModel.setUrl(item.getMedia().getM());
+                                     adapterModels.add(adapterModel);
+                                 }
+                                 retrofitOnDownloadListener.onDownloadComplete(adapterModels);
                              }
-                            retrofitOnDownloadListener.onDownloadComplete(flickrModel.getItems());
                         }else{
                             retrofitOnDownloadListener.onDownloadComplete(null);
                         }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    retrofitOnDownloadListener.onDownloadComplete(null);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    retrofitOnDownloadListener.onDownloadComplete(null);
                 }
-
             }
 
             @Override

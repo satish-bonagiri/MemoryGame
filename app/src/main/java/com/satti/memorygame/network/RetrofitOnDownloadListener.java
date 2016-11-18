@@ -1,5 +1,6 @@
 package com.satti.memorygame.network;
 
+import com.satti.memorygame.adapter.AdapterModel;
 import com.satti.memorygame.network.model.Item;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 
 public interface RetrofitOnDownloadListener {
 
-    void onDownloadComplete(List<Item> flickritems);
+    void onDownloadComplete(List<AdapterModel> flickritems);
 
 }

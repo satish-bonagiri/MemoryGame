@@ -17,4 +17,12 @@ public class TextUtils {
 		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 		toast.show();
 	}
+
+	public static void displayToastInBottom(Context context, int resId){
+		Toast  toast = Toast.makeText(context, resId, Toast.LENGTH_SHORT);
+		//toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		toast.show();
+	}
+
+
 }

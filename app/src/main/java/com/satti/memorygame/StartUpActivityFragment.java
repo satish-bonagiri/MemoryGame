@@ -2,8 +2,8 @@ package com.satti.memorygame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -19,12 +19,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.satti.memorygame.adapter.PhotoChooseAdapter;
+import com.satti.memorygame.adapter.AdapterModel;
+import com.satti.memorygame.adapter.ImageAdapter;
 import com.satti.memorygame.network.RetrofitNetworkClient;
 import com.satti.memorygame.network.RetrofitOnDownloadListener;
-import com.satti.memorygame.network.model.Item;
-import com.satti.memorygame.network.model.Media;
-import com.satti.memorygame.util.AppConstants;
 import com.satti.memorygame.util.Log;
 import com.satti.memorygame.util.Networkutil;
 import com.satti.memorygame.util.ProgressUtil;
@@ -33,6 +31,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -40,11 +40,11 @@ import java.util.List;
 public class StartUpActivityFragment extends Fragment implements RetrofitOnDownloadListener{
 
     private GridView mPhotoGridView;
-    PhotoChooseAdapter mPhotoChooseAdapter;
+    ImageAdapter mImageAdapter;
     //ArrayList<Drawable> mPhotosList;
 
     ImageView mShowImageView;
-    ArrayList<Item> mPhotosList;
+    ArrayList<AdapterModel> mPhotosList;
     TextView mTimerTextView;
     String mTimeFormat = "%02d:%02d";
     private MyCountDownTimer mTimer;
@@ -91,15 +91,15 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
 //        for(int i=0 ; i < 9 ;i++)
 //             mPhotosList.add(getActivity().getResources().getDrawable(R.mipmap.ic_launcher));
 
-        mPhotoChooseAdapter = new PhotoChooseAdapter(getActivity(), mPhotosList);
+        mImageAdapter = new ImageAdapter(getActivity(), mPhotosList,false);
         mPhotoGridView.setOnItemClickListener(onItemClickListener);
-        mPhotoGridView.setAdapter(mPhotoChooseAdapter);
+        mPhotoGridView.setAdapter(mImageAdapter);
 
         return  view;
     }
 
     @Override
-    public void onDownloadComplete(List<Item> flickritems) {
+    public void onDownloadComplete(List<AdapterModel> flickritems) {
         ProgressUtil.hideProgressDialog();
 
         if(flickritems != null){
@@ -107,26 +107,12 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
             for(int i=0 ; i < 9 ;i++){
                 mPhotosList.add(flickritems.get(i));
             }
-            mPhotoChooseAdapter.notifyDataSetChanged();
+            mImageAdapter.notifyDataSetChanged();
         }else{
             //show here error dialog or network not available dialog !!!
         }
     }
 
-    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            Item item = mPhotosList.get(position);
-            Picasso.with(getActivity()).load(mPhotosList.get(position).getMedia().getM())
-                    .error(R.mipmap.ic_launcher)
-                    .resize(120,120)
-                    .centerCrop()
-                    .into(mShowImageView);
-        }
-    };
-
-    //
 
     private void displayMsgDialog() {
 
@@ -161,15 +147,24 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
 
         @Override
         public void onFinish() {
-            if(!isVisible()){ //if frgament is not visible,don't update the UI
+            if(!isVisible()){ //if fragment is not visible,don't update the UI
                 return;
             }
             mTimerTextView.setText(getResources().getString(R.string.lets_start));
             if(mTimer != null){
                 mTimer.cancel();
             }
-            mShowImageView.setVisibility(View.VISIBLE);
-            mTimerTextView.setVisibility(View.GONE);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mShowImageView.setVisibility(View.VISIBLE);
+                    mTimerTextView.setVisibility(View.GONE);
+
+                    mImageAdapter.setGameStarted(true);
+                    mImageAdapter.notifyDataSetChanged();
+                }
+            },2000);
         }
 
         @Override
@@ -178,9 +173,24 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
             long seconds = (long) (millisUntilFinished / 1000) % 60 ;
             long minutes = (long) ((millisUntilFinished / (1000*60)) % 60);
 
-            mTimerTextView.setText(String.format(mTimeFormat, minutes, seconds));
+            mTimerTextView.setText(String.format(Locale.getDefault(),mTimeFormat, minutes, seconds));
         }
+    }
 
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+        }
+    };
+
+    private void updateShowImage(int position){
+        Picasso.with(getActivity()).load(mPhotosList.get(position).getUrl())
+                .error(R.mipmap.ic_launcher)
+                .resize(120,120)
+                .centerCrop()
+                .into(mShowImageView);
     }
 
 }

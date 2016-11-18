@@ -1,18 +1,13 @@
 package com.satti.memorygame;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.satti.memorygame.network.RetrofitNetworkClient;
-import com.satti.memorygame.util.Networkutil;
 import com.satti.memorygame.util.TextUtils;
 
 import java.io.File;
@@ -20,6 +15,8 @@ import java.io.File;
 public class StartUpActivity extends AppCompatActivity {
 
     GameApplication mGameApplication;
+
+    boolean doubleBackToExitPressedOnce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,7 @@ public class StartUpActivity extends AppCompatActivity {
         try {
             File dir = this.getCacheDir();
             if(deleteDir(dir)){
-                TextUtils.displayToast(this,getString(R.string.clear_cache_success));
+                TextUtils.displayToast(this,R.string.clear_cache_success);
             }else{
                 TextUtils.displayToast(this,getString(R.string.clear_cache_failure));
             }
@@ -80,5 +77,22 @@ public class StartUpActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(doubleBackToExitPressedOnce){
+            super.onBackPressed();
+            return;
+        }
+        doubleBackToExitPressedOnce = true;
+        TextUtils.displayToastInBottom(this,R.string.press_back_again);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        },2000);
     }
 }
