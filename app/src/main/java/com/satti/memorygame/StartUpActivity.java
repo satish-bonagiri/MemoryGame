@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.satti.memorygame.network.RetrofitNetworkClient;
 import com.satti.memorygame.util.Networkutil;
 
 public class StartUpActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class StartUpActivity extends AppCompatActivity {
         if(!Networkutil.isNetworkAvailable(StartUpActivity.this)){
             Toast.makeText(StartUpActivity.this,getString(R.string.no_network),Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
