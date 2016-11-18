@@ -23,7 +23,6 @@ import com.satti.memorygame.adapter.AdapterModel;
 import com.satti.memorygame.adapter.ImageAdapter;
 import com.satti.memorygame.network.RetrofitNetworkClient;
 import com.satti.memorygame.network.RetrofitOnDownloadListener;
-import com.satti.memorygame.util.Log;
 import com.satti.memorygame.util.Networkutil;
 import com.satti.memorygame.util.ProgressUtil;
 import com.satti.memorygame.util.TextUtils;
@@ -62,19 +61,7 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!Networkutil.isNetworkAvailable(getActivity())) {
-            TextUtils.displayToast(getActivity(), getString(R.string.no_network));
-            return;
-            //Toast.makeText(StartUpActivity.this,getString(R.string.no_network),Toast.LENGTH_SHORT).show();
-        }
-        ProgressUtil.displayProgressDialog(getActivity(), new ProgressUtil.DialogListener() {
-            @Override
-            public void onButtonPressed() {
-
-            }
-        });
-        RetrofitNetworkClient.getFlickrItems(this);
-
+        doImageDownLoad();
     }
 
     @Override
@@ -95,21 +82,23 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
         mPhotosList = new ArrayList<>();
         mRandomIntegerArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 9; i++) {
-            mRandomIntegerArrayList.add(i);
-        }
-        Log.e("SATTI", "initial Array :: " + mRandomIntegerArrayList.toString());
-        Collections.shuffle(mRandomIntegerArrayList);
-        Log.e("SATTI", "Final Array :: " + mRandomIntegerArrayList.toString());
-
-//        for(int i=0 ; i < 9 ;i++)
-//             mPhotosList.add(getActivity().getResources().getDrawable(R.mipmap.ic_launcher));
+        populateRandomIntegers();
 
         mImageAdapter = new ImageAdapter(getActivity(), mPhotosList, false);
         mPhotoGridView.setOnItemClickListener(onItemClickListener);
         mPhotoGridView.setAdapter(mImageAdapter);
 
         return view;
+    }
+
+    private void populateRandomIntegers() {
+        mRandomIntegerArrayList.clear();
+        for (int i = 0; i < 9; i++) {
+            mRandomIntegerArrayList.add(i);
+        }
+       // Log.e("SATTI", "initial Array :: " + mRandomIntegerArrayList.toString());
+        Collections.shuffle(mRandomIntegerArrayList);
+        // Log.e("SATTI", "Final Array :: " + mRandomIntegerArrayList.toString());
     }
 
     @Override
@@ -128,36 +117,14 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     }
 
 
-    private void displayMsgDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(
-                getActivity());
-        builder.setTitle(getString(R.string.game_rules));
-        String msgText = String.format(getString(R.string.prompt_text), 15);
-        Spanned spannedText = Html.fromHtml(msgText);
-        builder.setMessage(spannedText);
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.lets_start), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                mTimer = new MyCountDownTimer(15 * 1000, interval);
-                mTimer.start();
-            }
-        });
-
-        try {
-            builder.show();
-        } catch (WindowManager.BadTokenException e) {
-        }
-    }
-
-
     private class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
+            mShowImageView.setVisibility(View.INVISIBLE);
+            mTimerTextView.setVisibility(View.VISIBLE);
         }
+
 
         @Override
         public void onFinish() {
@@ -206,12 +173,13 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
                     mRandomIntegerArrayList.remove(mRandomIntegerArrayList.indexOf(currentPosition));
                     ((AdapterModel) parent.getAdapter().getItem(position)).setMatched(true);
                     mImageAdapter.notifyDataSetChanged();
-                    Log.e("SATTI","After Remove ::: "+mRandomIntegerArrayList.toString());
+                  //  Log.e("SATTI","After Remove ::: "+mRandomIntegerArrayList.toString());
                     if(!mRandomIntegerArrayList.isEmpty()){
                         currentPosition = mRandomIntegerArrayList.get(0);
                         updateShowImage(currentPosition);
                     }else{
-                        TextUtils.displayToast(getActivity(),R.string.done);
+                        //TextUtils.displayToast(getActivity(),R.string.done);
+                        displayDoneDialog();
                     }
                 }else{
                     //Already matched ,no need to remove
@@ -228,6 +196,101 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
                 .resize(120, 120)
                 .centerCrop()
                 .into(mShowImageView);
+    }
+
+
+
+    public void doImageDownLoad(){
+        if (!Networkutil.isNetworkAvailable(getActivity())) {
+            displayNoNetworkDialog();
+            return;
+        }
+        ProgressUtil.displayProgressDialog(getActivity(), new ProgressUtil.DialogListener() {
+            @Override
+            public void onButtonPressed() {
+
+            }
+        });
+        RetrofitNetworkClient.getFlickrItems(this);
+    }
+
+    private void displayMsgDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                getActivity());
+        builder.setTitle(getString(R.string.game_rules));
+        String msgText = String.format(getString(R.string.prompt_text), 15);
+        Spanned spannedText = Html.fromHtml(msgText);
+        builder.setMessage(spannedText);
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.lets_start), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+                mTimer = new MyCountDownTimer(15 * 1000, interval);
+                mTimer.start();
+            }
+        });
+
+        try {
+            builder.show();
+        } catch (WindowManager.BadTokenException e) {
+        }
+    }
+
+    private void displayNoNetworkDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                getActivity());
+        builder.setTitle(getString(R.string.no_network_header_text));
+        builder.setMessage(getString(R.string.no_network));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.no_network_try_again), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                if(!getActivity().isFinishing()){
+                    doImageDownLoad();
+                }
+            }
+        });
+
+        try {
+            builder.show();
+        } catch (WindowManager.BadTokenException e) {
+        }
+    }
+
+    private void displayDoneDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                getActivity());
+        builder.setTitle(getString(R.string.done));
+        builder.setMessage(getString(R.string.play_again));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                if(!getActivity().isFinishing()){
+                    mPhotosList.clear();
+                    mImageAdapter.setGameStarted(false);
+                    mImageAdapter.notifyDataSetChanged();
+                    populateRandomIntegers();
+                    doImageDownLoad();
+                }
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        try {
+            builder.show();
+        } catch (WindowManager.BadTokenException e) {
+        }
     }
 
 }

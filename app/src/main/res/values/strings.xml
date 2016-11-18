@@ -5,6 +5,7 @@
 
     <string name="image_content_description"> Something went wrong, Please comeback later !!!</string>
     <string name="no_network">Network is Not Available !</string>
+    <string name="no_network_header_text">No Network</string>
     <string name="clear_cache_success">Successfully Removed</string>
     <string name="clear_cache_failure">Please Try Again Later.</string>
     <string name="game_rules">Game Rules</string>
@@ -12,5 +13,9 @@
     <string name="lets_start">Let\'s Start</string>
     <string name="press_back_again">Press again to exit</string>
     <string name="try_again">Image Not Matched , Try Again !</string>
+    <string name="no_network_try_again">Try Again</string>
     <string name="done">Done !</string>
+    <string name="play_again">Do you want to play again ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
