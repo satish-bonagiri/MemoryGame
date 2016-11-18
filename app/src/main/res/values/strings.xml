@@ -11,4 +11,6 @@
     <string name="prompt_text">Please remember all the images (with in <i><font color= "#483D8B">%d</font></i> Seconds)</string>
     <string name="lets_start">Let\'s Start</string>
     <string name="press_back_again">Press again to exit</string>
+    <string name="try_again">Image Not Matched , Try Again !</string>
+    <string name="done">Done !</string>
 </resources>

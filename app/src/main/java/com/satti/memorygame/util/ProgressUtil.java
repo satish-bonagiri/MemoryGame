@@ -7,8 +7,8 @@ import android.view.WindowManager.BadTokenException;
 
 public class ProgressUtil {
     
-	static public interface DialogListener {
-		public void onButtonPressed();
+	public interface DialogListener {
+		void onButtonPressed();
 	}
 	
 	private static ProgressDialog sDialog;

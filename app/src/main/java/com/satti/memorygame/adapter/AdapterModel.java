@@ -7,6 +7,7 @@ package com.satti.memorygame.adapter;
 public class AdapterModel {
 
     private String url;
+    private boolean isMatched;
 
     public String getUrl() {
         return url;
@@ -14,5 +15,13 @@ public class AdapterModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean isMatched() {
+        return isMatched;
+    }
+
+    public void setMatched(boolean matched) {
+        isMatched = matched;
     }
 }

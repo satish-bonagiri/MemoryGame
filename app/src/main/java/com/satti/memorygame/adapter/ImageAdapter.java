@@ -65,18 +65,29 @@ public class ImageAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
+		AdapterModel adapterModel = imagesArrayList.get(position);
 		if(isGameStarted){
-			Picasso.with(mContext).load(R.mipmap.ic_launcher)
-					.resize(120,120)
-					.centerCrop()
-					.into(holder.imageView);
+			if(adapterModel.isMatched()){
+				Picasso.with(mContext).load(adapterModel.getUrl())
+						.error(R.mipmap.ic_launcher)
+						.resize(120,120)
+						.centerCrop()
+						.into(holder.imageView);
+			}else{
+				Picasso.with(mContext).load(R.mipmap.ic_launcher)
+						.resize(120,120)
+						.centerCrop()
+						.into(holder.imageView);
+			}
 		}else{
-			Picasso.with(mContext).load(imagesArrayList.get(position).getUrl())
+			Picasso.with(mContext).load(adapterModel.getUrl())
 					.error(R.mipmap.ic_launcher)
 					.resize(120,120)
 					.centerCrop()
 					.into(holder.imageView);
 		}
+
+
 		return convertView;
 	}
 
