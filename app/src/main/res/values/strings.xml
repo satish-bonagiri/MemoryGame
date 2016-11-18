@@ -3,12 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="action_clearCache">Clear Cache</string>
 
-    <string name="prompt_text">Please remember all the images with their position</string>
-    <string name="lets_start">Let\'s Start</string>
-
     <string name="image_content_description"> Something went wrong, Please comeback later !!!</string>
     <string name="no_network">Network is Not Available !</string>
     <string name="clear_cache_success">Cache deleted Successfully</string>
     <string name="clear_cache_failure">Please Try Again Later.</string>
-
+    <string name="game_rules">Game Rules</string>
+    <string name="prompt_text">Please remember all the images (with in <i><font color= "#483D8B">%d</font></i> Seconds)</string>
+    <string name="lets_start">Let\'s Start</string>
 </resources>

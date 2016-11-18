@@ -26,7 +26,21 @@
         android:src="@mipmap/ic_launcher"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/image_content_description"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"
+        android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/timer_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/timer_text_color" />
+
     </LinearLayout>
 
     <GridView
