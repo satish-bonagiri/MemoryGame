@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -32,16 +34,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class StartUpActivityFragment extends Fragment implements RetrofitOnDownloadListener {
 
+
+    private static int NO_OF_IMAGES_IN_GRID = 9;
     private GridView mPhotoGridView;
     ImageAdapter mImageAdapter;
-    //ArrayList<Drawable> mPhotosList;
 
     ImageView mShowImageView;
     ArrayList<AdapterModel> mPhotosList;
@@ -50,9 +52,13 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     private MyCountDownTimer mTimer;
     private long interval = 500;
 
+
     private ArrayList<Integer> mRandomIntegerArrayList;
 
-    private int currentPosition  = -1;
+    private int mCurrentPosition = -1;
+
+    private  Animation mBounceAnimation;
+    private Animation mFromMiddleAnimation;
 
     public StartUpActivityFragment() {
     }
@@ -60,8 +66,9 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         doImageDownLoad();
+        mBounceAnimation = AnimationUtils.loadAnimation(getActivity(),R.anim.bounce);
+        mFromMiddleAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.from_middle);
     }
 
     @Override
@@ -93,21 +100,18 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
 
     private void populateRandomIntegers() {
         mRandomIntegerArrayList.clear();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < NO_OF_IMAGES_IN_GRID; i++) {
             mRandomIntegerArrayList.add(i);
         }
-       // Log.e("SATTI", "initial Array :: " + mRandomIntegerArrayList.toString());
         Collections.shuffle(mRandomIntegerArrayList);
-        // Log.e("SATTI", "Final Array :: " + mRandomIntegerArrayList.toString());
     }
 
     @Override
     public void onDownloadComplete(List<AdapterModel> flickritems) {
         ProgressUtil.hideProgressDialog();
-
         if (flickritems != null) {
             displayMsgDialog();
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < NO_OF_IMAGES_IN_GRID; i++) {
                 mPhotosList.add(flickritems.get(i));
             }
             mImageAdapter.notifyDataSetChanged();
@@ -119,7 +123,7 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
 
     private class MyCountDownTimer extends CountDownTimer {
 
-        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
+        MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
             mShowImageView.setVisibility(View.INVISIBLE);
             mTimerTextView.setVisibility(View.VISIBLE);
@@ -144,10 +148,10 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
 
                     mImageAdapter.setGameStarted(true);
                     mImageAdapter.notifyDataSetChanged();
-                    currentPosition = mRandomIntegerArrayList.get(0);
-                    updateShowImage(currentPosition);
+                    mCurrentPosition = mRandomIntegerArrayList.get(0);
+                    updateShowImage(mCurrentPosition);
                 }
-            }, 2000);
+            }, 1000);
         }
 
         @Override
@@ -168,29 +172,39 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
                return;
             }
             AdapterModel adapterModel  = ((AdapterModel)parent.getAdapter().getItem(position));
-            if(position == currentPosition){
+            if(position == mCurrentPosition){
                 if (!adapterModel.isMatched()) {
-                    mRandomIntegerArrayList.remove(mRandomIntegerArrayList.indexOf(currentPosition));
+                    mRandomIntegerArrayList.remove(mRandomIntegerArrayList.indexOf(mCurrentPosition));
+                    //animate the child view
+                    view.clearAnimation();
+                    view.setAnimation(mFromMiddleAnimation);
+                    view.startAnimation(mFromMiddleAnimation);
+
                     ((AdapterModel) parent.getAdapter().getItem(position)).setMatched(true);
                     mImageAdapter.notifyDataSetChanged();
-                  //  Log.e("SATTI","After Remove ::: "+mRandomIntegerArrayList.toString());
                     if(!mRandomIntegerArrayList.isEmpty()){
-                        currentPosition = mRandomIntegerArrayList.get(0);
-                        updateShowImage(currentPosition);
+                        mCurrentPosition = mRandomIntegerArrayList.get(0);
+                        updateShowImage(mCurrentPosition);
                     }else{
-                        //TextUtils.displayToast(getActivity(),R.string.done);
                         displayDoneDialog();
                     }
                 }else{
                     //Already matched ,no need to remove
                 }
             }else{
-                TextUtils.displayToast(getActivity(),R.string.try_again);
+                if(!adapterModel.isMatched()){
+                    TextUtils.displayToast(getActivity(),R.string.try_again);
+                }
             }
         }
     };
 
     private void updateShowImage(int position) {
+
+        mShowImageView.clearAnimation();
+        mShowImageView.setAnimation(mBounceAnimation);
+        mShowImageView.startAnimation(mBounceAnimation);
+
         Picasso.with(getActivity()).load(mPhotosList.get(position).getUrl())
                 .error(R.mipmap.ic_launcher)
                 .resize(120, 120)
@@ -226,7 +240,8 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-
+                mShowImageView.clearAnimation();
+                mShowImageView.setVisibility(View.INVISIBLE);
                 mTimer = new MyCountDownTimer(15 * 1000, interval);
                 mTimer.start();
             }
@@ -274,6 +289,7 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
                     mPhotosList.clear();
                     mImageAdapter.setGameStarted(false);
                     mImageAdapter.notifyDataSetChanged();
+                    mPhotoGridView.clearAnimation();
                     populateRandomIntegers();
                     doImageDownLoad();
                 }
@@ -292,5 +308,4 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
         } catch (WindowManager.BadTokenException e) {
         }
     }
-
 }
