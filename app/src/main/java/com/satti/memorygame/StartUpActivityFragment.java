@@ -1,9 +1,11 @@
 package com.satti.memorygame;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -60,6 +62,9 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     private  Animation mBounceAnimation;
     private Animation mFromMiddleAnimation;
 
+    private static final int VIBRATE_DURATION = 35;
+    private Vibrator mVibrator;
+
     public StartUpActivityFragment() {
     }
 
@@ -67,6 +72,8 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         doImageDownLoad();
+        mVibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+
         mBounceAnimation = AnimationUtils.loadAnimation(getActivity(),R.anim.bounce);
         mFromMiddleAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.from_middle);
     }
@@ -175,6 +182,9 @@ public class StartUpActivityFragment extends Fragment implements RetrofitOnDownl
             if(position == mCurrentPosition){
                 if (!adapterModel.isMatched()) {
                     mRandomIntegerArrayList.remove(mRandomIntegerArrayList.indexOf(mCurrentPosition));
+                    if(mVibrator != null){
+                        mVibrator.vibrate(VIBRATE_DURATION);
+                    }
                     //animate the child view
                     view.clearAnimation();
                     view.setAnimation(mFromMiddleAnimation);
